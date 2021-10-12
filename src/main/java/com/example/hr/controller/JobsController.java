@@ -2,6 +2,7 @@ package com.example.hr.controller;
 
 import com.example.hr.entity.Jobs;
 import com.example.hr.service.JobsService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/jobs")
+@Api(value = "job", description = "operations for Job Service")
 public class JobsController {
 
     JobsService jobsService;
@@ -38,7 +40,7 @@ public class JobsController {
 
 
     @DeleteMapping(path = "/delete")
-    public String deleteJob(@RequestParam(name = "id")  String id) {
+    public String deleteJob(@RequestParam(name = "id") String id) {
         jobsService.deleteJobs(id);
         return "Successfully deleted";
     }

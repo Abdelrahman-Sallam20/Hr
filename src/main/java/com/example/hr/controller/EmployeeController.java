@@ -2,9 +2,11 @@ package com.example.hr.controller;
 
 import com.example.hr.entity.Employee;
 import com.example.hr.service.EmployeeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,11 +14,19 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/emp")
+@Api(value = "employee", description = "operations for Employee Service")
 public class EmployeeController {
 
     EmployeeService employeeService;
 
     @GetMapping(path = "/list")
+    @ApiOperation(value = "View list of employee", response = Employee.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view list"),
+            @ApiResponse(code = 403, message = "forbidden to access"),
+            @ApiResponse(code = 404, message = "resource not found"),
+    })
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
@@ -40,7 +50,7 @@ public class EmployeeController {
 
 
     @DeleteMapping(path = "/delete")
-    public String deleteEmployee(@RequestParam Long id) {
+    public String deleteEmployee(@RequestParam(name = "id") Long id) {
         employeeService.deleteEmployee(id);
         return "Successfully deleted";
     }

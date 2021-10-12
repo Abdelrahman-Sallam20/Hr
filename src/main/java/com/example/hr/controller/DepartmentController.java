@@ -1,9 +1,8 @@
 package com.example.hr.controller;
 
 import com.example.hr.entity.Department;
-import com.example.hr.entity.Jobs;
 import com.example.hr.service.DepartmentService;
-import com.example.hr.service.JobsService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/department")
+@Api(value = "department", description = "operations for Department Service")
 public class DepartmentController {
 
     DepartmentService departmentService;

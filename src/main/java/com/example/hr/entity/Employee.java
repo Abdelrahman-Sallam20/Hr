@@ -1,6 +1,7 @@
 package com.example.hr.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,10 +14,12 @@ import java.sql.Date;
 public class Employee {
 
     @Id
+    @ApiModelProperty(notes = "database generated Employee Id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employee_id")
     private long id;
 
+    @ApiModelProperty(notes = "First Name", required = true)
     @Column(name = "first_name")
     private String firstName;
 
