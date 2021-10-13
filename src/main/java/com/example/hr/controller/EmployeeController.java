@@ -7,8 +7,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -37,15 +40,15 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/new")
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee) {
         employeeService.addEmployee(employee);
-        return employee;
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @PutMapping(path = "/update")
-    public Employee updateEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody Employee employee) {
         employeeService.updateEmployee(employee);
-        return employee;
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
 
