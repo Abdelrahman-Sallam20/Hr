@@ -36,7 +36,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/find")
     public Employee findById(@RequestParam(name = "empId") Long empId) {
-        return employeeService.getEmployeeById(empId);
+        return employeeService.findById(empId);
     }
 
     @PostMapping(path = "/new")

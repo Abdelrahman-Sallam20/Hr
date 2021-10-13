@@ -1,6 +1,7 @@
 package com.example.hr.service;
 
 import com.example.hr.entity.Employee;
+import com.example.hr.error.RecordNotFoundException;
 import com.example.hr.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+    public Employee findById(Long id) {
+        return employeeRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("this employee not found :- id" + id));
     }
 
     public List<Employee> getEmployeeByName(String firstName, String lastName) {
